@@ -15,6 +15,7 @@
 		21DA6E9A25B9B57F001004A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DA6E9825B9B57F001004A3 /* LaunchScreen.storyboard */; };
 		21DA6EA525B9B580001004A3 /* CapitalCityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA6EA425B9B580001004A3 /* CapitalCityTests.swift */; };
 		21DA6EB025B9B580001004A3 /* CapitalCityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA6EAF25B9B580001004A3 /* CapitalCityUITests.swift */; };
+		21DA6ED525BA1F69001004A3 /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA6ED425BA1F69001004A3 /* Capital.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,9 @@
 		21DA6EAB25B9B580001004A3 /* CapitalCityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapitalCityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DA6EAF25B9B580001004A3 /* CapitalCityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalCityUITests.swift; sourceTree = "<group>"; };
 		21DA6EB125B9B580001004A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21DA6ED425BA1F69001004A3 /* Capital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
+		21DA6EDC25BAE0E5001004A3 /* cities_of_turkey.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cities_of_turkey.json; sourceTree = "<group>"; };
+		21DA6EE125BB0084001004A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,11 @@
 		21DA6E8C25B9B57B001004A3 /* CapitalCity */ = {
 			isa = PBXGroup;
 			children = (
+				21DA6EDE25BB0002001004A3 /* Controllers */,
+				21DA6EDD25BB0001001004A3 /* Extensions */,
+				21DA6EE025BB0002001004A3 /* Helpers */,
+				21DA6EDF25BB0002001004A3 /* ViewModel */,
+				21DA6EC025B9BBCB001004A3 /* Model */,
 				21DA6E8D25B9B57B001004A3 /* AppDelegate.swift */,
 				21DA6E8F25B9B57B001004A3 /* SceneDelegate.swift */,
 				21DA6E9125B9B57B001004A3 /* ViewController.swift */,
@@ -106,6 +115,7 @@
 				21DA6E9625B9B57F001004A3 /* Assets.xcassets */,
 				21DA6E9825B9B57F001004A3 /* LaunchScreen.storyboard */,
 				21DA6E9B25B9B57F001004A3 /* Info.plist */,
+				21DA6EDC25BAE0E5001004A3 /* cities_of_turkey.json */,
 			);
 			path = CapitalCity;
 			sourceTree = "<group>";
@@ -126,6 +136,47 @@
 				21DA6EB125B9B580001004A3 /* Info.plist */,
 			);
 			path = CapitalCityUITests;
+			sourceTree = "<group>";
+		};
+		21DA6EC025B9BBCB001004A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21DA6ED425BA1F69001004A3 /* Capital.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		21DA6EDD25BB0001001004A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			path = ../../../Baslangic/Extensions;
+			sourceTree = "<group>";
+		};
+		21DA6EDE25BB0002001004A3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				21DA6EE125BB0084001004A3 /* ViewController.swift */,
+			);
+			name = Controllers;
+			path = ../../../Baslangic/Controllers;
+			sourceTree = "<group>";
+		};
+		21DA6EDF25BB0002001004A3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			path = ../../../Baslangic/ViewModel;
+			sourceTree = "<group>";
+		};
+		21DA6EE025BB0002001004A3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			path = ../../../Baslangic/Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +311,7 @@
 			files = (
 				21DA6E9225B9B57B001004A3 /* ViewController.swift in Sources */,
 				21DA6E8E25B9B57B001004A3 /* AppDelegate.swift in Sources */,
+				21DA6ED525BA1F69001004A3 /* Capital.swift in Sources */,
 				21DA6E9025B9B57B001004A3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
