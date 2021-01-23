@@ -9,54 +9,77 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var mapView: MKMapView!
+    var cities: [City] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let localData = self.readLocalFile(forName: "cities") {
+            self.getCountries(jsonData: localData)
+            let annotations = cities.map { city -> MKAnnotation in
+                let annotation = MKPointAnnotation()
+                annotation.title = city.title
+                annotation.coordinate = CLLocationCoordinate2D(latitude: Double(city.latitude) ?? 0.0, longitude: Double(city.longitude) ?? 0.0)
+                annotation.subtitle = city.info
+                return annotation
+            }
+            mapView.addAnnotations(annotations)
+        }
+    }
+    
+    private func getCountries(jsonData: Data){
+        do {
+            cities = try JSONDecoder().decode([City].self, from: jsonData)
+        } catch (let error) {
+            print("decode error \(error)")
+        }
+    }
+    
+    private func readLocalFile(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: "cities", ofType: "json"),
+               let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch (let error) {
+            print(error)
+        }
         
-        let london = Capital(title: "London", coordinate: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), info: "Home to the 2012 Summer Olympics.")
-        let oslo = Capital(title: "Oslo", coordinate: CLLocationCoordinate2D(latitude: 59.95, longitude: 10.75), info: "Founded over a thousand years ago.")
-        let paris = Capital(title: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508), info: "Often called the City of Light.")
-        let rome = Capital(title: "Rome", coordinate: CLLocationCoordinate2D(latitude: 41.9, longitude: 12.5), info: "Has a whole country inside it.")
-        let washington = Capital(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "Named after George himself.")
-        let istanbul = Capital(title: "Istanbul", coordinate: CLLocationCoordinate2D(latitude: 41.0, longitude: 28.94), info: "A Very Nice Place")
-        mapView.addAnnotations([london, oslo, paris, rome, washington, istanbul] )
-        //mapView.mapType = mapTypes[Preference.mapType]
-        //mapView.showAnnotations(mapView.annotations, animated: true)
-
-}
-       
+        return nil
+    }
 }
 
 extension ViewController : MKMapViewDelegate {
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is Capital else { return nil }
-        let identifier = "Capital"
-
+        let identifier = "Province"
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-
+        
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-
+            
             let btn = UIButton(type: .detailDisclosure)
             annotationView?.rightCalloutAccessoryView = btn
-
+            
         } else {
             annotationView?.annotation = annotation
         }
         return annotationView
     }
-
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        guard let capital = view.annotation as? Capital else { return }
-        let placeName = capital.title
-        let placeInfo = capital.info
+        let viewAnno = view.annotation
+        let placeName = viewAnno?.title
+        let placeInfo = viewAnno?.subtitle
 
-        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
+        alert(title: placeName! ?? "", info: placeInfo! ?? "")
+    }
+    
+    func alert(title: String, info: String){
+        let ac = UIAlertController(title: title, message: info, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
